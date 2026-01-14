@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('trips', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->foreignId('destination_id')->constrained()->cascadeOnDelete();
+            $table->date('start_date')->nullable();
+            $table->unsignedSmallInteger('days_count')->default(1);
+            $table->text('notes')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('trips');
+    }
+};

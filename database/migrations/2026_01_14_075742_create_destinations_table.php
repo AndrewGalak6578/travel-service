@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('region')->index();
+            $table->string('experience_type')->index(); // eco, local, adventure...
+            $table->text('description');
+            $table->json('highlights')->nullable();
+            $table->text('sustainability_notes')->nullable();
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }
